@@ -22,9 +22,10 @@ jobs:
       uses: android-actions/setup-android@v3
 
     - name: Grant execute permission to Gradle
-      run: chmod +x ./gradlew
+      run: chmod +x ./mobile/gradlew
 
     - name: Build debug APK and test APK
+      working-directory: mobile
       run: ./gradlew assembleDebug assembleAndroidTest
 
     - name: Start Android Emulator and run tests
@@ -34,4 +35,5 @@ jobs:
         target: google_apis
         arch: x86_64
         profile: Nexus 6
+        working-directory: mobile
         script: ./gradlew connectedDebugAndroidTest
